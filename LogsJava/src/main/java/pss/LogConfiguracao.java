@@ -17,17 +17,17 @@ public class LogConfiguracao {
     private static final String LOGCONF = "log_conf.properties";
     private static final String TIPO = "tipo";
 
-    public static String getTipoLog() {
-        
-        Properties props = new Properties();
-        
-        try (FileInputStream in = new FileInputStream(LOGCONF)) {
-            props.load(in);
-            return props.getProperty(TIPO, "csv");
-        } catch (IOException e) {
-            return "csv";
-        }
+  public static int getTipoLog() {
+    Properties props = new Properties();
+    
+    try (FileInputStream in = new FileInputStream(LOGCONF)) {
+        props.load(in);
+        String valor = props.getProperty(TIPO, "0");
+        return Integer.parseInt(valor);
+    } catch (IOException | NumberFormatException e) {
+        return 0;
     }
+}
 
     public static void setTipoLog(String tipo) {
         
