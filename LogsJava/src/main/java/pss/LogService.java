@@ -14,11 +14,13 @@ import java.time.format.DateTimeFormatter;
         
 public class LogService {
     
-    private ILog Escolha; 
-    private ILog getEscolha() {
+    private static ILog Escolha; 
+    private static ILog getEscolha() {
         
-    LogConfiguracao conf = new LogConfiguracao(0);
-    int tipo = conf.getTipoLog();
+    int tipo = LogConfiguracao.getTipoLog();
+        
+  //  LogConfiguracao conf = new LogConfiguracao(0);
+  //  int tipo = conf.getTipoLog();
     
     if (Escolha == null || (tipo == 1 && !(Escolha instanceof LogJson)) || (tipo == 0 && !(Escolha instanceof LogCsv))) {
     Escolha = (tipo == 1)
@@ -36,7 +38,7 @@ return Escolha;
         return now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, HH:mm:ss"));
     }
 
-    public void logOperacaoSucesso(String operacao, String nomeUsuario, String usuarioAutenticado) {
+    public static void logOperacaoSucesso(String operacao, String nomeUsuario, String usuarioAutenticado) {
         String mensagem = String.format(
             "%s: %s, (%s, %s)",
             operacao,
@@ -47,7 +49,7 @@ return Escolha;
         getEscolha().registrar(mensagem);
     }
 
-    public void logOperacaoFalha(String operacao, String nomeUsuario, String usuarioAutenticado, String msgFalha) {
+    public static void logOperacaoFalha(String operacao, String nomeUsuario, String usuarioAutenticado, String msgFalha) {
         String mensagem = String.format(
             "Ocorreu a falha \"%s\" ao realizar a operação %s para o usuário %s, (%s, %s).",
             msgFalha,

@@ -11,15 +11,15 @@ package pss;
 
 public class LogConfiguracao {
     
-    private int tipo;
+    private static int tipo;
     
     public LogConfiguracao(int tipoInicial) {
         this.tipo = tipoInicial;
     }   
-    public int getTipoLog(){  
+    public static int getTipoLog(){  
         return tipo;      
     }
-    public void setTipoLog(int tipo){
-        this.tipo = tipo;
+    public static void setTipoLog(int tipo){
+        LogConfiguracao.tipo = tipo;
     }
 }
